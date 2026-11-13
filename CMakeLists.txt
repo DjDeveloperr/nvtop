@@ -128,6 +128,13 @@ else()
   set(ROCKCHIP_SUPPORT_DEFAULT OFF)
 endif()
 
+# Apple silicon GPUs under the Linux asahi driver: Linux on arm64 only
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux" AND CMAKE_SYSTEM_PROCESSOR MATCHES "aarch64")
+  set(ASAHI_SUPPORT_DEFAULT ON)
+else()
+  set(ASAHI_SUPPORT_DEFAULT OFF)
+endif()
+
 # Tenstorrent support is only available on Linux
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
   set(TENSTORRENT_SUPPORT_DEFAULT ON)
@@ -145,6 +152,7 @@ option(PANFROST_SUPPORT "Build support for Mali GPUs through panfrost driver" ${
 option(PANTHOR_SUPPORT "Build support for Mali GPUs through panthor driver" ${PANTHOR_SUPPORT_DEFAULT})
 option(ASCEND_SUPPORT "Build support for Ascend NPUs through Ascend DCMI" ${ASCEND_SUPPORT_DEFAULT})
 option(V3D_SUPPORT "Build support for Raspberrypi through v3d" ${V3D_SUPPORT_DEFAULT})
+option(ASAHI_SUPPORT "Build support for Apple silicon GPUs through the Linux asahi driver" ${ASAHI_SUPPORT_DEFAULT})
 option(TPU_SUPPORT "Build support for Google TPUs through GRPC" ${TPU_SUPPORT_DEFAULT})
 option(ROCKCHIP_SUPPORT "Enable support for Rockchip NPU" ${ROCKCHIP_SUPPORT_DEFAULT})
 option(METAX_SUPPORT "Build support for MetaX GPUs through libmxsml" ${METAX_SUPPORT_DEFAULT})

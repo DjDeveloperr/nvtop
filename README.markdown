@@ -9,7 +9,7 @@ accelerators. It can handle multiple GPUs and print information about them in a
 htop-familiar way.
 
 Currently supported vendors are AMD (Linux amdgpu driver), Apple (limited M1 &
-M2 support), Huawei (Ascend), Intel (Linux i915/Xe drivers), NVIDIA (Linux
+M2 support with Metal, Linux asahi driver), Huawei (Ascend), Intel (Linux i915/Xe drivers), NVIDIA (Linux
 proprietary divers), Qualcomm Adreno (Linux MSM driver), Broadcom VideoCore (Linux v3d driver),
 Rockchip, MetaX (MXSML driver), Enflame (Linux EFML driver), Tenstorrent (Linux tt-kmd driver).
 Rockchip, MetaX (MXSML driver), Enflame (Linux EFML driver), Iluvatar CoreX (ixML / libixml).
@@ -158,6 +158,13 @@ NVTOP includes some initial support for Apple using Metal. This is only supporte
 
 **APPLE SUPPORT STATUS**
 - Apple support is still being worked on. Some bugs and limitations may apply.
+
+On Linux, NVTOP supports Apple silicon GPUs using the `asahi` driver (enabled by
+default on 64-bit Arm Linux, `-DASAHI_SUPPORT=ON`). The GPU utilization, clock
+and power come from the driver's `agx_stats` sysfs file and the memory from its
+`gpu_memory` file, where the GPU and kernel report them. Per-process GPU usage
+and memory come from the standard DRM fdinfo keys (`drm-engine-vertex`,
+`drm-engine-fragment`, `drm-engine-compute`, `drm-resident-system`).
 
 ### Ascend
 
